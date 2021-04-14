@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Stack;
 
 import javax.swing.JButton;
@@ -12,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-public class _02_TextUndoRedo implements KeyListener, ActionListener {
+public class _02_TextUndoRedo implements KeyListener {
 	/*
 	 * Create a JFrame with a JPanel and a JLabel.
 	 * 
@@ -42,33 +44,50 @@ public class _02_TextUndoRedo implements KeyListener, ActionListener {
 	void Run() {
 		frame.add(panel);
 		panel.add(label);
-		panel.add(undoButton);
+		// panel.add(undoButton);
 		frame.addKeyListener(this);
-		undoButton.addActionListener(this);
+		// undoButton.addMouseListener(this);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(600, 400));
-frame.pack();
+		frame.pack();
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (!(e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
-			label.setText(label.getText() + e.getKeyChar());
-		} else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-			if (label.getText().length() > 0) {
-				undo.push(e.getKeyChar());
-				String labelSubstring = label.getText().substring(0, label.getText().length() - 1);
-				label.setText(labelSubstring);
+		if ((e.getKeyCode() == KeyEvent.VK_BACK_SLASH)&&(!undo.isEmpty())) {
+		
+			char letter = undo.pop();
+			label.setText(label.getText() + letter);
+		} else {
+			if (!(e.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
+				label.setText(label.getText() + e.getKeyChar());
+			} else {
+				String text=label.getText();
+				if (text.length() > 0) {
+					undo.push(text.charAt(text.length()-1));
+					System.out.println(undo.size());
+					String labelSubstring = text.substring(0, text.length() - 1);
+					label.setText(labelSubstring);
+
+					printStack();
+				}
 			}
 		}
-frame.pack();
+		frame.pack();
+	}
+
+	void printStack() {
+		for (int i = 0; i < undo.size(); i++) {
+			System.out.print(undo.get(i));
+
+		}
+		System.out.println("");
 	}
 
 	@Override
@@ -76,12 +95,4 @@ frame.pack();
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		label.setText(label.getText() + undo.pop());
-		frame.pack();
-
-	}
-
 }
