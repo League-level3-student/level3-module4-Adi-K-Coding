@@ -64,27 +64,34 @@ public class _01_IntroToQueue {
 		// 5. Print and remove a random number of elements, from 1 to 5 elements,
 		// from the front of the Queue. Example:
 		// "removing 3 elements from Queue: 25 57 2"
+
 		Random randInt = new Random();
-		int randIntRemove = randInt.nextInt(5) + 1;
-		String removedDoubles = "";
-		for (int i = 0; i < randIntRemove; i++) {
-			removedDoubles += doublesQueue.remove() + "   ";
-		}
-		System.out.println("Removing " + randIntRemove + " from Queue " + removedDoubles);
-		// 6. Pop off as many elements from the stack to fill the Queue with 5
-		// elements. If there aren't enough elements in the Stack to fill the
-		// queue, fill the queue as much as possible.
 
-		for (int i = 0; i < 5; i++) {
-			if (doubles.isEmpty()) {
-				break;
-
-			} else {
-				doublesQueue.push(doubles.pop());
+		while (!doubles.isEmpty() || !doublesQueue.isEmpty()) {
+			int randIntRemove = randInt.nextInt(5) + 1;
+			String removedDoubles = "";
+			for (int i = 0; i < randIntRemove; i++) {
+				if (!doublesQueue.isEmpty()) {
+					removedDoubles += doublesQueue.remove() + "   ";
+				}
 			}
+			System.out.println("Removing " + randIntRemove + " from Queue " + removedDoubles);
+			// 6. Pop off as many elements from the stack to fill the Queue with 5
+			// elements. If there aren't enough elements in the Stack to fill the
+			// queue, fill the queue as much as possible.
+
+			for (int i = 0; i < 5; i++) {
+				if (doubles.isEmpty()) {
+					break;
+
+				} else {
+					doublesQueue.push(doubles.pop());
+				}
+			}
+			// 7. Loop until there are no more elements in either the Stack or Queue
+			// and all the elements are printed
+
 		}
-		// 7. Loop until there are no more elements in either the Stack or Queue
-		// and all the elements are printed
-//While Loop?
+		 System.out.println(doublesQueue.size());
 	}
 }
