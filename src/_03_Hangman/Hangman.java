@@ -34,7 +34,7 @@ public class Hangman implements KeyListener {
 	}
 
 	void game() {
-		String userNumber = JOptionPane.showInputDialog("How many words would you like to guess?(Up till 266.");
+		String userNumber = JOptionPane.showInputDialog("How many words would you like to guess?(Up till 266)");
 		int userNumberInt = Integer.parseInt(userNumber);
 		for (int i = 0; i < userNumberInt; i++) {
 			String wordFromDict = Utilities.readRandomLineFromFile("dictionary.txt");
