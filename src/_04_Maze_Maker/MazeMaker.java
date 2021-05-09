@@ -27,11 +27,12 @@ public class MazeMaker {
 		// finish line.
 		int horizontalStart = randGen.nextInt(2) * (maze.cells.length - 1);
 		int verticalStart = randGen.nextInt(maze.cells.length);
-
+		System.out.println(verticalStart);
+		System.out.println(horizontalStart);
 		if (horizontalStart == 0) {
-			maze.cells[horizontalStart][verticalStart].setWestWall(false);
+			maze.cells[verticalStart][horizontalStart].setWestWall(false);
 		} else {
-			maze.cells[horizontalStart][verticalStart].setEastWall(false);
+			maze.cells[verticalStart][horizontalStart].setEastWall(false);
 		}
 
 		int horizontalEnd = 0;
@@ -42,9 +43,9 @@ public class MazeMaker {
 		}
 		int verticalEnd = randGen.nextInt(maze.cells.length);
 		if (horizontalEnd == 0) {
-			maze.cells[horizontalEnd][verticalEnd].setWestWall(false);
+			maze.cells[verticalEnd][horizontalEnd].setWestWall(false);
 		} else {
-			maze.cells[horizontalEnd][verticalEnd].setEastWall(false);
+			maze.cells[verticalEnd][horizontalEnd].setEastWall(false);
 		}
 		// 2. select a random cell in the maze to start
 		int randomCellx = randGen.nextInt(maze.cells.length);
